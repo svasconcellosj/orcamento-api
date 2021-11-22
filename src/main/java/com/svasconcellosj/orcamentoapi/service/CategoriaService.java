@@ -24,7 +24,7 @@ public class CategoriaService {
 	}
 	
 	public CategoriaModel buscaId(Long id) {
-		return cR.getById(id);
+		return cR.findById(id).orElse(null);
 	}
 	
 	public void exclui(CategoriaModel categoria) {
@@ -33,7 +33,9 @@ public class CategoriaService {
 	
 	public CategoriaModel altera(Long id, CategoriaModel categoria) {
 		CategoriaModel cM = buscaId(id);
-		
+		if ( cM == null) {
+			
+		}
 		BeanUtils.copyProperties(categoria, cM, "id");
 		return grava(cM);
 	}
