@@ -33,9 +33,6 @@ public class CategoriaService {
 	
 	public CategoriaModel altera(Long id, CategoriaModel categoria) {
 		CategoriaModel cM = buscaId(id);
-		if ( cM == null) {
-			
-		}
 		BeanUtils.copyProperties(categoria, cM, "id");
 		return grava(cM);
 	}
