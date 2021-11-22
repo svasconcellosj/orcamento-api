@@ -45,7 +45,7 @@ public class PessoaController {
 	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
 	public ResponseEntity<PessoaModel> buscaPessoa(@PathVariable Long id) {
 		PessoaModel pM = pS.buscaId(id);
-		return new ResponseEntity<PessoaModel>(pM, HttpStatus.OK);
+		return pM == null ? new ResponseEntity<PessoaModel>(pM, HttpStatus.NOT_FOUND) : new ResponseEntity<PessoaModel>(pM, HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
