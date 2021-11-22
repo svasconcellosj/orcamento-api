@@ -51,9 +51,6 @@ public class CategoriaController {
 	@RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
 	public ResponseEntity<CategoriaModel> excluiCategoria(@PathVariable Long id) {
 		CategoriaModel cM = cS.buscaId(id);
-		if ( cM == null ) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
 		cS.exclui(cM);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}

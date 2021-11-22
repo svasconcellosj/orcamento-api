@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +33,7 @@ public class PessoaController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<PessoaModel> gravaPessoa(@RequestBody PessoaModel pessoa, HttpServletResponse response) {
+	public ResponseEntity<PessoaModel> gravaPessoa(@Validated @RequestBody PessoaModel pessoa, HttpServletResponse response) {
 		PessoaModel pM = pS.grava(pessoa);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(pM.getId()).toUri();
@@ -55,7 +56,7 @@ public class PessoaController {
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-	public ResponseEntity<PessoaModel> alteraPessoa(@PathVariable Long id, @RequestBody PessoaModel pessoa) {
+	public ResponseEntity<PessoaModel> alteraPessoa(@Validated @PathVariable Long id, @RequestBody PessoaModel pessoa) {
 		PessoaModel pM = pS.altera(id, pessoa);
 		return new ResponseEntity<PessoaModel>(pM, HttpStatus.OK);
 	}

@@ -32,7 +32,7 @@ public class PessoaService {
 	}
 	
 	public PessoaModel altera(Long id, PessoaModel pessoa) {
-		PessoaModel pM = buscaID(id);
+		PessoaModel pM = buscaId(id);
 		
 		BeanUtils.copyProperties(pessoa, pM, "id");
 		return grava(pessoa); 		

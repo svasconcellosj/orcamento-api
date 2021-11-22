@@ -1,12 +1,10 @@
 package com.svasconcellosj.orcamentoapi.model;
 
 import javax.persistence.Embeddable;
-import javax.validation.constraints.Size;
 
 @Embeddable
 public class EnderecoModel {
 
-	@Size(min = 5, max = 30)
 	private String logradouro;
 	private String numero;
 	private String complemento;
