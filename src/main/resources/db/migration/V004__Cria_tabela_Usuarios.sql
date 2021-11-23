@@ -10,11 +10,14 @@ CREATE TABLE usuarios_permissoes (
 	id_usuario BIGINT(20) NOT NULL,
 	id_permissao BIGINT(20) NOT NULL,
 	PRIMARY KEY (id_usuario, id_permissao),
-	FOREIGN KEY (id_usuario) REFERENCES usuario(id),
-	FOREIGN KEY (id_permissao) REFERENCES permissao(id)
+	FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
+	FOREIGN KEY (id_permissao) REFERENCES permissoes(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+-- usuarios
+INSERT INTO usuarios (nome, email, senha) values ('Administrador', 'admin@algamoney.com', '$2a$10$X607ZPhQ4EgGNaYKt3n4SONjIv9zc.VMWdEuhCuba7oLAL5IvcL5.');
+INSERT INTO usuarios (nome, email, senha) values ('Maria Silva', 'maria@algamoney.com', '$2a$10$Zc3w6HyuPOPXamaMhh.PQOXvDnEsadztbfi6/RyZWJDzimE8WQjaq');
 
 -- admin
 INSERT INTO usuarios_permissoes (id_usuario, id_permissao) values (1, 1);
