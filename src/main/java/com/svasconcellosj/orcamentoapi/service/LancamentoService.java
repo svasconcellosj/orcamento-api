@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.svasconcellosj.orcamentoapi.model.LancamentoModel;
+import com.svasconcellosj.orcamentoapi.model.PessoaModel;
 import com.svasconcellosj.orcamentoapi.repository.LancamentoRepository;
 
 @Service
@@ -15,11 +16,18 @@ public class LancamentoService {
 	@Autowired
 	private LancamentoRepository lR;
 	
+	@Autowired
+	PessoaService pS;
+	
 	public List<LancamentoModel> buscaTodos() {
 		return lR.findAll();
 	}
 	
 	public LancamentoModel grava(LancamentoModel lancamento) {
+		PessoaModel pM = pS.buscaId(lancamento.getPessoa().getId());
+		if ( pM.isInativo() ) {
+			return null;
+		}
 		return lR.save(lancamento);
 	}
 	
