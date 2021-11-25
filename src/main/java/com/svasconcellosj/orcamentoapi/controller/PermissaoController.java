@@ -1,11 +1,11 @@
 package com.svasconcellosj.orcamentoapi.controller;
 
-import java.net.URI;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.svasconcellosj.orcamentoapi.event.RecursoCriadoEvent;
 import com.svasconcellosj.orcamentoapi.model.PermissaoModel;
 import com.svasconcellosj.orcamentoapi.service.PermissaoService;
 
@@ -25,6 +25,9 @@ public class PermissaoController {
 
 	@Autowired
 	private PermissaoService pS;
+	
+	@Autowired
+	private ApplicationEventPublisher publisher;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<PermissaoModel>> buscaPermissoes() {
@@ -36,8 +39,7 @@ public class PermissaoController {
 	public ResponseEntity<PermissaoModel> gravaPermissao(@Validated @RequestBody PermissaoModel permissao, HttpServletResponse response) {
 		PermissaoModel pM = pS.grava(permissao);
 
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(pM.getId()).toUri();
-		response.addHeader("Location", uri.toASCIIString());
+		publisher.publishEvent(new RecursoCriadoEvent(this, response, pM.getId()));
 
 		return new ResponseEntity<PermissaoModel>(pM, HttpStatus.CREATED);
 	}
