@@ -1,11 +1,11 @@
 package com.svasconcellosj.orcamentoapi.controller;
 
-import java.net.URI;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.svasconcellosj.orcamentoapi.event.RecursoCriadoEvent;
 import com.svasconcellosj.orcamentoapi.model.LancamentoModel;
 import com.svasconcellosj.orcamentoapi.service.LancamentoService;
 
@@ -25,6 +25,9 @@ public class LancamentoController {
 
 	@Autowired
 	private LancamentoService lS;
+	
+	@Autowired
+	private ApplicationEventPublisher publisher;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<LancamentoModel>> buscaLancamentos() {
@@ -36,8 +39,16 @@ public class LancamentoController {
 	public ResponseEntity<LancamentoModel> gravaLancamento(@Validated @RequestBody LancamentoModel lancamento, HttpServletResponse response) {
 		LancamentoModel lM = lS.grava(lancamento);
 		
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("{id}").buildAndExpand(lM.getId()).toUri();
-		response.addHeader("Location", uri.toASCIIString());
+		/*
+		 * URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("{id}").
+		 * buildAndExpand(lM.getId()).toUri(); response.addHeader("Location",
+		 * uri.toASCIIString());
+		 * 
+		 * ou criando um Evento para encurtar o codigo (codigo a baixo)
+		 */	
+		
+		publisher.publishEvent(new RecursoCriadoEvent(this, response, lM.getId()));
+		
 		
 		return new ResponseEntity<LancamentoModel>(lM, HttpStatus.CREATED);
 	}
