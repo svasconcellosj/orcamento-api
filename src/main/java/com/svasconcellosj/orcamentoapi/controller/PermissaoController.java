@@ -47,8 +47,7 @@ public class PermissaoController {
 	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
 	public ResponseEntity<PermissaoModel> buscaPermissao(@PathVariable Long id) {
 		PermissaoModel pM = pS.buscaId(id);
-		return pM == null ? new ResponseEntity<>(HttpStatus.NOT_FOUND)
-				: new ResponseEntity<PermissaoModel>(pM, HttpStatus.OK);
+		return pM == null ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<PermissaoModel>(pM, HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.DELETE, value = "/{id}")

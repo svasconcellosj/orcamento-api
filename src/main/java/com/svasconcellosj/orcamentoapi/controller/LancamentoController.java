@@ -1,11 +1,11 @@
 package com.svasconcellosj.orcamentoapi.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.svasconcellosj.orcamentoapi.event.RecursoCriadoEvent;
 import com.svasconcellosj.orcamentoapi.model.LancamentoModel;
+import com.svasconcellosj.orcamentoapi.repository.filter.LancamentoFilter;
 import com.svasconcellosj.orcamentoapi.service.LancamentoService;
 
 @RestController
@@ -30,9 +31,9 @@ public class LancamentoController {
 	private ApplicationEventPublisher publisher;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<LancamentoModel>> buscaLancamentos() {
-		List<LancamentoModel> lM = lS.buscaTodos();
-		return new ResponseEntity<List<LancamentoModel>>(lM, HttpStatus.OK);
+	public ResponseEntity<Page<LancamentoModel>> buscaLancamentos(LancamentoFilter lancamentoFilter, Pageable pageable) {
+		Page<LancamentoModel> lM = lS.buscaTodos(lancamentoFilter, pageable);
+		return new ResponseEntity<Page<LancamentoModel>>(lM, HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
