@@ -1,11 +1,11 @@
 package com.svasconcellosj.orcamentoapi.controller;
 
-import java.net.URI;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.svasconcellosj.orcamentoapi.event.RecursoCriadoEvent;
 import com.svasconcellosj.orcamentoapi.model.CategoriaModel;
 import com.svasconcellosj.orcamentoapi.service.CategoriaService;
 
@@ -25,6 +25,9 @@ public class CategoriaController {
 
 	@Autowired
 	private CategoriaService cS;
+	
+	@Autowired
+	private ApplicationEventPublisher publisher;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<CategoriaModel>> buscaCategorias() {
@@ -36,8 +39,7 @@ public class CategoriaController {
 	public ResponseEntity<CategoriaModel> gravaCategoria(@Validated @RequestBody CategoriaModel categoria, HttpServletResponse response) {
 		CategoriaModel cM = cS.grava(categoria);
 		
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(cM.getId()).toUri();
-		response.setHeader("Location", uri.toASCIIString());
+		publisher.publishEvent(new RecursoCriadoEvent(this, response, cM.getId()));
 	 
 		return new ResponseEntity<CategoriaModel>(cM, HttpStatus.CREATED);
 	}

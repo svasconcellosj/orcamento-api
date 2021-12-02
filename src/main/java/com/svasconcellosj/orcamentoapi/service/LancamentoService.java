@@ -1,13 +1,15 @@
 package com.svasconcellosj.orcamentoapi.service;
 
-import java.util.List;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.svasconcellosj.orcamentoapi.model.LancamentoModel;
+import com.svasconcellosj.orcamentoapi.model.PessoaModel;
 import com.svasconcellosj.orcamentoapi.repository.LancamentoRepository;
+import com.svasconcellosj.orcamentoapi.repository.filter.LancamentoFilter;
 
 @Service
 public class LancamentoService {
@@ -15,11 +17,18 @@ public class LancamentoService {
 	@Autowired
 	private LancamentoRepository lR;
 	
-	public List<LancamentoModel> buscaTodos() {
-		return lR.findAll();
+	@Autowired
+	PessoaService pS;
+	
+	public Page<LancamentoModel> buscaTodos(LancamentoFilter lancamentoFilter, Pageable pageable) {
+		return lR.filtrar(lancamentoFilter, pageable);
 	}
 	
 	public LancamentoModel grava(LancamentoModel lancamento) {
+		PessoaModel pM = pS.buscaId(lancamento.getPessoa().getId());
+		if ( pM.isInativo() ) {
+			return null;
+		}
 		return lR.save(lancamento);
 	}
 	
