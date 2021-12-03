@@ -1,11 +1,16 @@
 package com.svasconcellosj.orcamentoapi.model;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -27,6 +32,11 @@ public class UsuarioModel {
 	
 	@NotNull
 	private String senha;
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "usuarios_permissoes", joinColumns = @JoinColumn(name = "id_usuario")	, inverseJoinColumns = @JoinColumn(name = "id_permissao"))
+	private List<PermissaoModel> permissoes;
+
 
 	public Long getId() {
 		return id;
@@ -59,6 +69,15 @@ public class UsuarioModel {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+
+	public List<PermissaoModel> getPermissoes() {
+		return permissoes;
+	}
+
+	public void setPermissoes(List<PermissaoModel> permissoes) {
+		this.permissoes = permissoes;
+	}
+
 
 	@Override
 	public int hashCode() {
