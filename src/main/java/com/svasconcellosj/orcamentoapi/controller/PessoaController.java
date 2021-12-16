@@ -1,13 +1,14 @@
 package com.svasconcellosj.orcamentoapi.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.svasconcellosj.orcamentoapi.event.RecursoCriadoEvent;
 import com.svasconcellosj.orcamentoapi.model.PessoaModel;
+import com.svasconcellosj.orcamentoapi.repository.filter.PessoaFilter;
 import com.svasconcellosj.orcamentoapi.service.PessoaService;
 
 @RestController
@@ -30,9 +32,10 @@ public class PessoaController {
 	private ApplicationEventPublisher publisher;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<PessoaModel>> buscaPessoas() {
-		List<PessoaModel> pM = pS.buscaTodos();
-		return new ResponseEntity<List<PessoaModel>>(pM, HttpStatus.OK); 
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA') and hasAuthority('SCOPE_read')" )
+	public ResponseEntity<Page<PessoaModel>> buscaPessoas(PessoaFilter pessoaFilter, Pageable pageable) {
+		Page<PessoaModel> pM = pS.buscaTodos(pessoaFilter,pageable);
+		return new ResponseEntity<Page<PessoaModel>>(pM, HttpStatus.OK); 
 	}
 
 	@RequestMapping(method = RequestMethod.POST)

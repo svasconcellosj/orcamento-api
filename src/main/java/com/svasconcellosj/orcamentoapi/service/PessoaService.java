@@ -1,13 +1,14 @@
 package com.svasconcellosj.orcamentoapi.service;
 
-import java.util.List;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.svasconcellosj.orcamentoapi.model.PessoaModel;
 import com.svasconcellosj.orcamentoapi.repository.PessoaRepository;
+import com.svasconcellosj.orcamentoapi.repository.filter.PessoaFilter;
 
 @Service
 public class PessoaService {
@@ -15,8 +16,8 @@ public class PessoaService {
 	@Autowired
 	private PessoaRepository pR;
 	
-	public List<PessoaModel> buscaTodos() {
-		return pR.findAll();
+	public Page<PessoaModel> buscaTodos(PessoaFilter pessoaFilter, Pageable pageable) {
+		return pR.filtrar(pessoaFilter, pageable);
 	}
 	
 	public PessoaModel grava(PessoaModel pessoa) {

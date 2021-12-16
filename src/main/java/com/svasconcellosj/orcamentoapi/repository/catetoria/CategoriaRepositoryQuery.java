@@ -9,4 +9,5 @@ import com.svasconcellosj.orcamentoapi.repository.filter.CategoriaFilter;
 public interface CategoriaRepositoryQuery {
 
 	public Page<CategoriaModel> filtrar(CategoriaFilter categoriaFilter, Pageable pageable);
+	
 }
