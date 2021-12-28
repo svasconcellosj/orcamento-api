@@ -1,4 +1,4 @@
-package com.svasconcellosj.orcamentoapi.controller;
+package com.svasconcellosj.orcamentoapi.usuario.controller;
 
 import java.util.List;
 
@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.svasconcellosj.orcamentoapi.event.RecursoCriadoEvent;
-import com.svasconcellosj.orcamentoapi.model.PermissaoModel;
-import com.svasconcellosj.orcamentoapi.service.PermissaoService;
+import com.svasconcellosj.orcamentoapi.usuario.model.PermissaoModel;
+import com.svasconcellosj.orcamentoapi.usuario.service.PermissaoService;
 
 @RestController
 @RequestMapping("/permissoes")

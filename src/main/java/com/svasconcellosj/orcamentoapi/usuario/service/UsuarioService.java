@@ -1,4 +1,4 @@
-package com.svasconcellosj.orcamentoapi.service;
+package com.svasconcellosj.orcamentoapi.usuario.service;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.svasconcellosj.orcamentoapi.model.UsuarioModel;
-import com.svasconcellosj.orcamentoapi.repository.UsuarioRepositoy;
+import com.svasconcellosj.orcamentoapi.usuario.model.UsuarioModel;
+import com.svasconcellosj.orcamentoapi.usuario.repository.UsuarioRepositoy;
 
 @Service
 public class UsuarioService {

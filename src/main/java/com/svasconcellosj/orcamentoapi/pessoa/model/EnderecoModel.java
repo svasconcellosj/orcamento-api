@@ -1,4 +1,4 @@
-package com.svasconcellosj.orcamentoapi.model;
+package com.svasconcellosj.orcamentoapi.pessoa.model;
 
 import javax.persistence.Embeddable;
 

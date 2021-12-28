@@ -1,4 +1,4 @@
-package com.svasconcellosj.orcamentoapi.service;
+package com.svasconcellosj.orcamentoapi.usuario.service;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.svasconcellosj.orcamentoapi.model.PermissaoModel;
-import com.svasconcellosj.orcamentoapi.repository.PermissaoRepository;
+import com.svasconcellosj.orcamentoapi.usuario.model.PermissaoModel;
+import com.svasconcellosj.orcamentoapi.usuario.repository.PermissaoRepository;
 
 @Service
 public class PermissaoService {

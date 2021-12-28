@@ -15,7 +15,6 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.Proxy;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.svasconcellosj.orcamentoapi.model.EnderecoModel;
 
 @Entity
 @Table(name = "pessoas")

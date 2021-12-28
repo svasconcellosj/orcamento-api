@@ -1,4 +1,4 @@
-package com.svasconcellosj.orcamentoapi.model;
+package com.svasconcellosj.orcamentoapi.usuario.model;
 
 import java.util.Objects;
 
