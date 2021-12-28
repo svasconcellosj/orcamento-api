@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import com.svasconcellosj.orcamentoapi.categoria.model.CategoriaModel;
+import com.svasconcellosj.orcamentoapi.pessoa.model.PessoaModel;
 
 @Entity
 @Table(name = "lancamentos")

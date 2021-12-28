@@ -1,4 +1,4 @@
-package com.svasconcellosj.orcamentoapi.controller;
+package com.svasconcellosj.orcamentoapi.pessoa.controller;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.svasconcellosj.orcamentoapi.event.RecursoCriadoEvent;
-import com.svasconcellosj.orcamentoapi.model.PessoaModel;
-import com.svasconcellosj.orcamentoapi.repository.filter.PessoaFilter;
-import com.svasconcellosj.orcamentoapi.service.PessoaService;
+import com.svasconcellosj.orcamentoapi.pessoa.model.PessoaModel;
+import com.svasconcellosj.orcamentoapi.pessoa.repository.filter.PessoaFilter;
+import com.svasconcellosj.orcamentoapi.pessoa.service.PessoaService;
 
 @RestController
 @RequestMapping("/pessoas")

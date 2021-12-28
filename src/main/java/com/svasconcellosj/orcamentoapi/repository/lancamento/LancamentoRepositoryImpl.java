@@ -19,7 +19,7 @@ import org.springframework.util.ObjectUtils;
 import com.svasconcellosj.orcamentoapi.categoria.model.CategoriaModel_;
 import com.svasconcellosj.orcamentoapi.model.LancamentoModel;
 import com.svasconcellosj.orcamentoapi.model.LancamentoModel_;
-import com.svasconcellosj.orcamentoapi.model.PessoaModel_;
+import com.svasconcellosj.orcamentoapi.pessoa.model.PessoaModel_;
 import com.svasconcellosj.orcamentoapi.repository.filter.LancamentoFilter;
 import com.svasconcellosj.orcamentoapi.repository.projection.ResumoLancamento;
 

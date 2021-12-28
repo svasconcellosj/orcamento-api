@@ -7,7 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.svasconcellosj.orcamentoapi.model.LancamentoModel;
-import com.svasconcellosj.orcamentoapi.model.PessoaModel;
+import com.svasconcellosj.orcamentoapi.pessoa.model.PessoaModel;
+import com.svasconcellosj.orcamentoapi.pessoa.service.PessoaService;
 import com.svasconcellosj.orcamentoapi.repository.LancamentoRepository;
 import com.svasconcellosj.orcamentoapi.repository.filter.LancamentoFilter;
 

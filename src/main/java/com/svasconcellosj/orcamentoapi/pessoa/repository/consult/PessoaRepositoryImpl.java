@@ -1,4 +1,4 @@
-package com.svasconcellosj.orcamentoapi.repository.pessoa;
+package com.svasconcellosj.orcamentoapi.pessoa.repository.consult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +16,9 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.ObjectUtils;
 
-import com.svasconcellosj.orcamentoapi.model.PessoaModel;
-import com.svasconcellosj.orcamentoapi.model.PessoaModel_;
-import com.svasconcellosj.orcamentoapi.repository.filter.PessoaFilter;
+import com.svasconcellosj.orcamentoapi.pessoa.model.PessoaModel;
+import com.svasconcellosj.orcamentoapi.pessoa.model.PessoaModel_;
+import com.svasconcellosj.orcamentoapi.pessoa.repository.filter.PessoaFilter;
 
 public class PessoaRepositoryImpl implements PessoaRepositoryQuery {
 	

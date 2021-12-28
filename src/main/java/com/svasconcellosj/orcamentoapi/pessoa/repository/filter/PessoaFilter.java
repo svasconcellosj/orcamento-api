@@ -1,4 +1,4 @@
-package com.svasconcellosj.orcamentoapi.repository.filter;
+package com.svasconcellosj.orcamentoapi.pessoa.repository.filter;
 
 public class PessoaFilter {
 	

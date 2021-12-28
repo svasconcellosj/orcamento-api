@@ -1,4 +1,4 @@
-package com.svasconcellosj.orcamentoapi.service;
+package com.svasconcellosj.orcamentoapi.pessoa.service;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,9 +6,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.svasconcellosj.orcamentoapi.model.PessoaModel;
-import com.svasconcellosj.orcamentoapi.repository.PessoaRepository;
-import com.svasconcellosj.orcamentoapi.repository.filter.PessoaFilter;
+import com.svasconcellosj.orcamentoapi.pessoa.model.PessoaModel;
+import com.svasconcellosj.orcamentoapi.pessoa.repository.PessoaRepository;
+import com.svasconcellosj.orcamentoapi.pessoa.repository.filter.PessoaFilter;
 
 @Service
 public class PessoaService {

@@ -1,10 +1,10 @@
-package com.svasconcellosj.orcamentoapi.repository.pessoa;
+package com.svasconcellosj.orcamentoapi.pessoa.repository.consult;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.svasconcellosj.orcamentoapi.model.PessoaModel;
-import com.svasconcellosj.orcamentoapi.repository.filter.PessoaFilter;
+import com.svasconcellosj.orcamentoapi.pessoa.model.PessoaModel;
+import com.svasconcellosj.orcamentoapi.pessoa.repository.filter.PessoaFilter;
 
 public interface PessoaRepositoryQuery {
 

@@ -8,6 +8,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
 import com.svasconcellosj.orcamentoapi.categoria.model.CategoriaModel;
+import com.svasconcellosj.orcamentoapi.pessoa.model.PessoaModel;
 
 @Generated(value = "org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor")
 @StaticMetamodel(LancamentoModel.class)
