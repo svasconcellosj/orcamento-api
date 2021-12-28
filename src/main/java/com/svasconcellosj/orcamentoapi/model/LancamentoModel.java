@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.svasconcellosj.orcamentoapi.categoria.model.CategoriaModel;
+
 @Entity
 @Table(name = "lancamentos")
 public class LancamentoModel {

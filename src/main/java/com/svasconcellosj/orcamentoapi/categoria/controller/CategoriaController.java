@@ -1,4 +1,4 @@
-package com.svasconcellosj.orcamentoapi.controller;
+package com.svasconcellosj.orcamentoapi.categoria.controller;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.svasconcellosj.orcamentoapi.categoria.model.CategoriaModel;
+import com.svasconcellosj.orcamentoapi.categoria.repository.filter.CategoriaFilter;
+import com.svasconcellosj.orcamentoapi.categoria.service.CategoriaService;
 import com.svasconcellosj.orcamentoapi.event.RecursoCriadoEvent;
-import com.svasconcellosj.orcamentoapi.model.CategoriaModel;
-import com.svasconcellosj.orcamentoapi.repository.filter.CategoriaFilter;
-import com.svasconcellosj.orcamentoapi.service.CategoriaService;
 
 @RestController
 @RequestMapping("/categorias")

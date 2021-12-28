@@ -16,7 +16,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.ObjectUtils;
 
-import com.svasconcellosj.orcamentoapi.model.CategoriaModel_;
+import com.svasconcellosj.orcamentoapi.categoria.model.CategoriaModel_;
 import com.svasconcellosj.orcamentoapi.model.LancamentoModel;
 import com.svasconcellosj.orcamentoapi.model.LancamentoModel_;
 import com.svasconcellosj.orcamentoapi.model.PessoaModel_;

@@ -1,10 +1,10 @@
-package com.svasconcellosj.orcamentoapi.repository.catetoria;
+package com.svasconcellosj.orcamentoapi.categoria.repository.consult;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.svasconcellosj.orcamentoapi.model.CategoriaModel;
-import com.svasconcellosj.orcamentoapi.repository.filter.CategoriaFilter;
+import com.svasconcellosj.orcamentoapi.categoria.model.CategoriaModel;
+import com.svasconcellosj.orcamentoapi.categoria.repository.filter.CategoriaFilter;
 
 public interface CategoriaRepositoryQuery {
 

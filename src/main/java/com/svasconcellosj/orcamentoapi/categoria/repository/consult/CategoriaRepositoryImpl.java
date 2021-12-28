@@ -1,4 +1,4 @@
-package com.svasconcellosj.orcamentoapi.repository.catetoria;
+package com.svasconcellosj.orcamentoapi.categoria.repository.consult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +16,9 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.ObjectUtils;
 
-import com.svasconcellosj.orcamentoapi.model.CategoriaModel;
-import com.svasconcellosj.orcamentoapi.model.CategoriaModel_;
-import com.svasconcellosj.orcamentoapi.repository.filter.CategoriaFilter;
+import com.svasconcellosj.orcamentoapi.categoria.model.CategoriaModel;
+import com.svasconcellosj.orcamentoapi.categoria.model.CategoriaModel_;
+import com.svasconcellosj.orcamentoapi.categoria.repository.filter.CategoriaFilter;
 
 public class CategoriaRepositoryImpl implements CategoriaRepositoryQuery {
 	

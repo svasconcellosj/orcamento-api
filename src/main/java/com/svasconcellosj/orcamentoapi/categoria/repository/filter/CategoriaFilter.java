@@ -1,4 +1,4 @@
-package com.svasconcellosj.orcamentoapi.repository.filter;
+package com.svasconcellosj.orcamentoapi.categoria.repository.filter;
 
 public class CategoriaFilter {
 	
