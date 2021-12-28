@@ -1,4 +1,4 @@
-package com.svasconcellosj.orcamentoapi.repository.filter;
+package com.svasconcellosj.orcamentoapi.lancamento.repositoty.filter;
 
 import java.time.LocalDate;
 

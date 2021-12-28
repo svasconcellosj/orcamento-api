@@ -1,9 +1,9 @@
-package com.svasconcellosj.orcamentoapi.repository.projection;
+package com.svasconcellosj.orcamentoapi.lancamento.repositoty.projection;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import com.svasconcellosj.orcamentoapi.model.TipoLancamento;
+import com.svasconcellosj.orcamentoapi.lancamento.model.TipoLancamento;
 
 public class ResumoLancamento {
     

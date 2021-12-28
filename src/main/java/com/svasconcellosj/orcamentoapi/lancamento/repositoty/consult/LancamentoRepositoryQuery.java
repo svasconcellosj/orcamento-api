@@ -1,8 +1,8 @@
-package com.svasconcellosj.orcamentoapi.repository.lancamento;
+package com.svasconcellosj.orcamentoapi.lancamento.repositoty.consult;
 
-import com.svasconcellosj.orcamentoapi.model.LancamentoModel;
-import com.svasconcellosj.orcamentoapi.repository.filter.LancamentoFilter;
-import com.svasconcellosj.orcamentoapi.repository.projection.ResumoLancamento;
+import com.svasconcellosj.orcamentoapi.lancamento.model.LancamentoModel;
+import com.svasconcellosj.orcamentoapi.lancamento.repositoty.filter.LancamentoFilter;
+import com.svasconcellosj.orcamentoapi.lancamento.repositoty.projection.ResumoLancamento;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -1,4 +1,4 @@
-package com.svasconcellosj.orcamentoapi.repository.lancamento;
+package com.svasconcellosj.orcamentoapi.lancamento.repositoty.consult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +17,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.util.ObjectUtils;
 
 import com.svasconcellosj.orcamentoapi.categoria.model.CategoriaModel_;
-import com.svasconcellosj.orcamentoapi.model.LancamentoModel;
-import com.svasconcellosj.orcamentoapi.model.LancamentoModel_;
+import com.svasconcellosj.orcamentoapi.lancamento.model.LancamentoModel;
+import com.svasconcellosj.orcamentoapi.lancamento.model.LancamentoModel_;
+import com.svasconcellosj.orcamentoapi.lancamento.repositoty.filter.LancamentoFilter;
+import com.svasconcellosj.orcamentoapi.lancamento.repositoty.projection.ResumoLancamento;
 import com.svasconcellosj.orcamentoapi.pessoa.model.PessoaModel_;
-import com.svasconcellosj.orcamentoapi.repository.filter.LancamentoFilter;
-import com.svasconcellosj.orcamentoapi.repository.projection.ResumoLancamento;
 
 
 

@@ -1,4 +1,4 @@
-package com.svasconcellosj.orcamentoapi.model;
+package com.svasconcellosj.orcamentoapi.lancamento.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
