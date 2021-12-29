@@ -1,5 +1,8 @@
 package com.svasconcellosj.orcamentoapi.lancamento.controller;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.svasconcellosj.orcamentoapi.event.RecursoCriadoEvent;
+import com.svasconcellosj.orcamentoapi.lancamento.dto.LancamentoCategoriaEstatistica;
+import com.svasconcellosj.orcamentoapi.lancamento.dto.LancamentoDiaEstatistica;
 import com.svasconcellosj.orcamentoapi.lancamento.model.LancamentoModel;
 import com.svasconcellosj.orcamentoapi.lancamento.repositoty.filter.LancamentoFilter;
 import com.svasconcellosj.orcamentoapi.lancamento.service.LancamentoService;
@@ -71,6 +77,20 @@ public class LancamentoController {
 	public ResponseEntity<LancamentoModel> alteraLancamento(@Validated @PathVariable Long id, @RequestBody LancamentoModel lancamento) {
 		LancamentoModel lM = lS.altera(id, lancamento);
 		return new ResponseEntity<LancamentoModel>(lM, HttpStatus.OK);
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "estatisticas/por-categoria/{mes}")
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
+	public ResponseEntity<List<LancamentoCategoriaEstatistica>> estatisticaPorCategoria(@PathVariable int mes) {
+		List<LancamentoCategoriaEstatistica> estatisticaCategoria = lS.estatisticaPorCategoria(LocalDate.now().withMonth(mes));
+		return new ResponseEntity<List<LancamentoCategoriaEstatistica>>(estatisticaCategoria, HttpStatus.OK);
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "estatisticas/por-dia/{mes}")
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and hasAuthority('SCOPE_read')")
+	public ResponseEntity<List<LancamentoDiaEstatistica>> estatiscaPorDia(@PathVariable int mes) {
+		List<LancamentoDiaEstatistica> estatisticaDia = lS.estatisticaPorDia(LocalDate.now().withMonth(mes));
+		return new ResponseEntity<List<LancamentoDiaEstatistica>>(estatisticaDia, HttpStatus.OK);
 	}
 	
 }
