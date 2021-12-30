@@ -1,14 +1,24 @@
 package com.svasconcellosj.orcamentoapi.categoria.service;
 
+import java.io.InputStream;
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.svasconcellosj.orcamentoapi.categoria.dto.CategoriaListagem;
 import com.svasconcellosj.orcamentoapi.categoria.model.CategoriaModel;
 import com.svasconcellosj.orcamentoapi.categoria.repository.CategoriaRepository;
 import com.svasconcellosj.orcamentoapi.categoria.repository.filter.CategoriaFilter;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @Service
 public class CategoriaService {
@@ -36,6 +46,13 @@ public class CategoriaService {
 		CategoriaModel cM = buscaId(id);
 		BeanUtils.copyProperties(categoria, cM, "id");
 		return grava(cM);
+	}
+	
+	public byte[] relatorioListagemCategoria() throws JRException {
+		List<CategoriaListagem> dados = cR.relatorioListagemCategoria();
+		InputStream inputStream = this.getClass().getResourceAsStream("../report/ListagemCategoria.jasper");
+		JasperPrint jasperPrint = JasperFillManager.fillReport( inputStream, null, new JRBeanCollectionDataSource(dados) );		
+		return JasperExportManager.exportReportToPdf(jasperPrint);
 	}
 
 }

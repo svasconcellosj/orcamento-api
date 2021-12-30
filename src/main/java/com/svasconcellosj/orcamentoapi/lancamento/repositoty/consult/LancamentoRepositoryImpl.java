@@ -20,13 +20,12 @@ import org.springframework.util.ObjectUtils;
 import com.svasconcellosj.orcamentoapi.categoria.model.CategoriaModel_;
 import com.svasconcellosj.orcamentoapi.lancamento.dto.LancamentoCategoriaEstatistica;
 import com.svasconcellosj.orcamentoapi.lancamento.dto.LancamentoDiaEstatistica;
+import com.svasconcellosj.orcamentoapi.lancamento.dto.LancamentoPessoaEstatistica;
 import com.svasconcellosj.orcamentoapi.lancamento.model.LancamentoModel;
 import com.svasconcellosj.orcamentoapi.lancamento.model.LancamentoModel_;
 import com.svasconcellosj.orcamentoapi.lancamento.repositoty.filter.LancamentoFilter;
 import com.svasconcellosj.orcamentoapi.lancamento.repositoty.projection.ResumoLancamento;
 import com.svasconcellosj.orcamentoapi.pessoa.model.PessoaModel_;
-
-
 
 public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 
@@ -127,8 +126,11 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 		LocalDate ultimoDia = mesReferencia.withDayOfMonth(mesReferencia.lengthOfMonth());
 		criteria.where(builder.greaterThanOrEqualTo(root.get(LancamentoModel_.dataVencimento), primeiroDia), builder.lessThanOrEqualTo(root.get(LancamentoModel_.dataVencimento), ultimoDia));
 		
-		//Qual o agrupamento desejado
-		criteria.groupBy(root.get(LancamentoModel_.categoria));
+		//GROUP BY categoria
+		criteria.groupBy(root.get(LancamentoModel_.categoria).get(CategoriaModel_.descricao));
+		
+		//ORDER BY categoria
+		criteria.orderBy( builder.asc(root.get(LancamentoModel_.categoria).get(CategoriaModel_.descricao)) );
 		
 		//Monta a consulta
 		TypedQuery<LancamentoCategoriaEstatistica> typedQuery = manager.createQuery(criteria);
@@ -142,7 +144,7 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 		CriteriaQuery<LancamentoDiaEstatistica> criteria = builder.createQuery(LancamentoDiaEstatistica.class);
 		Root<LancamentoModel> root = criteria.from(LancamentoModel.class);
 		
-		//SELECT tipo, dia, sum(valor) FROM lancamentos
+		//SELECT tipo, dataVencimento, sum(valor) FROM lancamentos
 		criteria.select(builder.construct(LancamentoDiaEstatistica.class, root.get(LancamentoModel_.tipo),root.get(LancamentoModel_.dataVencimento) ,builder.sum(root.get(LancamentoModel_.valor))));		
 		
 		//WHERE dataVencimento >= primeiroDia AND davaVencimento <= ultimoDia
@@ -150,11 +152,38 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 		LocalDate ultimoDia = mesReferencia.withDayOfMonth(mesReferencia.lengthOfMonth());
 		criteria.where(builder.greaterThanOrEqualTo(root.get(LancamentoModel_.dataVencimento), primeiroDia), builder.lessThanOrEqualTo(root.get(LancamentoModel_.dataVencimento), ultimoDia));
 				
-		//Agrupamento
-		criteria.groupBy(root.get(LancamentoModel_.tipo), root.get(LancamentoModel_.dataVencimento));
+		//GROUP BY tipo, dataVencimento
+		criteria.groupBy( root.get(LancamentoModel_.tipo), root.get(LancamentoModel_.dataVencimento) );
+		
+		//ORDER BY categoria
+		criteria.orderBy( builder.asc(root.get(LancamentoModel_.tipo)) );
 		
 		//Monta a consulta
 		TypedQuery<LancamentoDiaEstatistica> typedQuery = manager.createQuery(criteria);
+		
+		return typedQuery.getResultList();
+	}
+	
+	@Override
+	public List<LancamentoPessoaEstatistica> porPessoa(LocalDate inicio, LocalDate fim) {
+		CriteriaBuilder builder = manager.getCriteriaBuilder();
+		CriteriaQuery<LancamentoPessoaEstatistica> criteria = builder.createQuery(LancamentoPessoaEstatistica.class);
+		Root<LancamentoModel> root = criteria.from(LancamentoModel.class);
+		
+		//SELECT tipo, pessoa, sum(valor) FROM lancamentos
+		criteria.select( builder.construct( LancamentoPessoaEstatistica.class, root.get(LancamentoModel_.tipo), root.get(LancamentoModel_.pessoa).get(PessoaModel_.nome), builder.sum(root.get(LancamentoModel_.valor)) ) );		
+		
+		//WHERE dataVencimento >= inicio AND davaVencimento <= fim
+		criteria.where(builder.greaterThanOrEqualTo(root.get(LancamentoModel_.dataVencimento), inicio), builder.lessThanOrEqualTo(root.get(LancamentoModel_.dataVencimento), fim));
+				
+		//GROUP BY tipo, pessoa
+		criteria.groupBy(root.get(LancamentoModel_.tipo), root.get(LancamentoModel_.pessoa).get(PessoaModel_.nome));
+		
+		//ORDER BY pessoa
+		criteria.orderBy( builder.asc(root.get(LancamentoModel_.pessoa).get(PessoaModel_.nome)) );
+		
+		//Monta a consulta
+		TypedQuery<LancamentoPessoaEstatistica> typedQuery = manager.createQuery(criteria);
 		
 		return typedQuery.getResultList();
 	}

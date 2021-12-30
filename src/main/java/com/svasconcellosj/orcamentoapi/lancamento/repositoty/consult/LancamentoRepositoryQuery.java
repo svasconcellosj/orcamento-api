@@ -2,6 +2,7 @@ package com.svasconcellosj.orcamentoapi.lancamento.repositoty.consult;
 
 import com.svasconcellosj.orcamentoapi.lancamento.dto.LancamentoCategoriaEstatistica;
 import com.svasconcellosj.orcamentoapi.lancamento.dto.LancamentoDiaEstatistica;
+import com.svasconcellosj.orcamentoapi.lancamento.dto.LancamentoPessoaEstatistica;
 import com.svasconcellosj.orcamentoapi.lancamento.model.LancamentoModel;
 import com.svasconcellosj.orcamentoapi.lancamento.repositoty.filter.LancamentoFilter;
 import com.svasconcellosj.orcamentoapi.lancamento.repositoty.projection.ResumoLancamento;
@@ -19,6 +20,6 @@ public interface LancamentoRepositoryQuery {
 	public Page<ResumoLancamento> resumir(LancamentoFilter lancamentoFilter, Pageable pageable);
 
 	public List<LancamentoCategoriaEstatistica> porCategoria(LocalDate mesReferencia);
-	public List<LancamentoDiaEstatistica> porDia(LocalDate mesReferencia);
-	
+	public List<LancamentoDiaEstatistica> porDia(LocalDate mesReferencia);	
+	public List<LancamentoPessoaEstatistica> porPessoa(LocalDate inicio, LocalDate fim);
 }

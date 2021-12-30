@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -20,6 +22,8 @@ import com.svasconcellosj.orcamentoapi.categoria.model.CategoriaModel;
 import com.svasconcellosj.orcamentoapi.categoria.repository.filter.CategoriaFilter;
 import com.svasconcellosj.orcamentoapi.categoria.service.CategoriaService;
 import com.svasconcellosj.orcamentoapi.event.RecursoCriadoEvent;
+
+import net.sf.jasperreports.engine.JRException;
 
 @RestController
 @RequestMapping("/categorias")
@@ -68,6 +72,13 @@ public class CategoriaController {
 	public ResponseEntity<CategoriaModel> alteraCategoria(@Validated @PathVariable Long id, @RequestBody CategoriaModel categoria) {
 		CategoriaModel cM = cS.altera(id, categoria);
 		return new ResponseEntity<CategoriaModel>(cM, HttpStatus.OK);
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "listagem-categorias")
+	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_CATEGORIA') and hasAuthority('SCOPE_write')")
+	public ResponseEntity<byte[]> relatorioListagemCategoria() throws JRException {
+		byte[] listagem = cS.relatorioListagemCategoria();
+		return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_PDF_VALUE).body(listagem);
 	}
 	
 }

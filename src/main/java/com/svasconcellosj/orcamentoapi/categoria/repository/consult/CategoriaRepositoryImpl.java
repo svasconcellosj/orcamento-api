@@ -16,6 +16,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.ObjectUtils;
 
+import com.svasconcellosj.orcamentoapi.categoria.dto.CategoriaListagem;
 import com.svasconcellosj.orcamentoapi.categoria.model.CategoriaModel;
 import com.svasconcellosj.orcamentoapi.categoria.model.CategoriaModel_;
 import com.svasconcellosj.orcamentoapi.categoria.repository.filter.CategoriaFilter;
@@ -72,6 +73,19 @@ public class CategoriaRepositoryImpl implements CategoriaRepositoryQuery {
 		
 		criteria.select(builder.count(root));
 		return manager.createQuery(criteria).getSingleResult();
+	}
+	
+	@Override
+	public List<CategoriaListagem> relatorioListagemCategoria() {
+		CriteriaBuilder builder = manager.getCriteriaBuilder();
+		CriteriaQuery<CategoriaListagem> query = builder.createQuery(CategoriaListagem.class);
+		Root<CategoriaModel> root = query.from(CategoriaModel.class);
+		
+		query.select( builder.construct(CategoriaListagem.class, root.get(CategoriaModel_.id), root.get(CategoriaModel_.descricao)) );
+		query.orderBy( builder.asc(root.get(CategoriaModel_.descricao)) );
+		
+		TypedQuery<CategoriaListagem> typedQuery = manager.createQuery(query);
+		return typedQuery.getResultList();
 	}
 
 }
