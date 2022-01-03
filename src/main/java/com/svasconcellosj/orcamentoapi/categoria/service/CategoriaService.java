@@ -54,5 +54,13 @@ public class CategoriaService {
 		JasperPrint jasperPrint = JasperFillManager.fillReport( inputStream, null, new JRBeanCollectionDataSource(dados) );		
 		return JasperExportManager.exportReportToPdf(jasperPrint);
 	}
-
+	
+	//ordenar de forma mais simples usando o JPArepository
+	public byte[] findByOrderByDescricao() throws JRException {
+		List<CategoriaModel> dados = cR.findByOrderByDescricao();
+		InputStream inputStream = this.getClass().getResourceAsStream("../report/ListagemCategoria.jasper");
+		JasperPrint jasperPrint = JasperFillManager.fillReport( inputStream, null, new JRBeanCollectionDataSource(dados) );		
+		return JasperExportManager.exportReportToPdf(jasperPrint);
+	}
+	
 }
