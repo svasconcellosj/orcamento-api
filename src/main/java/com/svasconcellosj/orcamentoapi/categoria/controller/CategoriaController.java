@@ -1,7 +1,5 @@
 package com.svasconcellosj.orcamentoapi.categoria.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,7 +84,7 @@ public class CategoriaController {
 	@RequestMapping(method = RequestMethod.GET, value = "listagem-categoriasDescricao")
 	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_CATEGORIA') and hasAuthority('SCOPE_write')")
 	public ResponseEntity<byte[]> relatorioListagemCategoriaDescricao() throws JRException {
-		byte[] listagem = cS.findByOrderByDescricao();
+		byte[] listagem = cS.findByOrderByDescricao();	
 		return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_PDF_VALUE).body(listagem);
 	}
 	
