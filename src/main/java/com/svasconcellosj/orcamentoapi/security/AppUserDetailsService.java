@@ -13,8 +13,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.svasconcellosj.orcamentoapi.model.UsuarioModel;
-import com.svasconcellosj.orcamentoapi.repository.UsuarioRepositoy;
+import com.svasconcellosj.orcamentoapi.usuario.model.UsuarioModel;
+import com.svasconcellosj.orcamentoapi.usuario.repository.UsuarioRepositoy;
 
 
 @Service

@@ -2,10 +2,10 @@ package com.svasconcellosj.orcamentoapi.security;
 
 import java.util.Collection;
 
-import com.svasconcellosj.orcamentoapi.model.UsuarioModel;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
+
+import com.svasconcellosj.orcamentoapi.usuario.model.UsuarioModel;
 
 public class UsuarioSistema extends User {
     private static final long serialVersionUID = 1L;
