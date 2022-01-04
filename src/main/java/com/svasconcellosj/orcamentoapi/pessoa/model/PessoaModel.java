@@ -1,7 +1,6 @@
 package com.svasconcellosj.orcamentoapi.pessoa.model;
 
 import java.beans.Transient;
-import java.util.Objects;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -16,9 +15,12 @@ import org.hibernate.annotations.Proxy;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Data;
+
 @Entity
 @Table(name = "pessoas")
 @Proxy(lazy = false)
+@Data
 public class PessoaModel {
 
 	@Id
@@ -34,60 +36,11 @@ public class PessoaModel {
 
 	@NotNull
 	private Boolean ativo;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public EnderecoModel getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(EnderecoModel endereco) {
-		this.endereco = endereco;
-	}
-
-	public Boolean getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
-	}
-
+	
 	@JsonIgnore
 	@Transient
 	public boolean isInativo() {
 		return !this.ativo;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		PessoaModel other = (PessoaModel) obj;
-		return Objects.equals(id, other.id);
 	}
 
 }

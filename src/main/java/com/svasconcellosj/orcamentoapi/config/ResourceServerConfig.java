@@ -35,7 +35,7 @@ public class ResourceServerConfig extends WebSecurityConfigurerAdapter{
     public void configure(HttpSecurity http) throws Exception {
         
         http.authorizeRequests()
-                .antMatchers("/categorias").permitAll()
+                .antMatchers("/categorias").permitAll() //--> para permitir consulta sem altenticacao
                 .anyRequest().authenticated()
             .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
